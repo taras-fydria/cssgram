@@ -13,7 +13,59 @@
   const inputs = document.querySelectorAll(
     ".ba-filters input, #base, #spacing"
   );
+  const filters = {
+    1977: {
+      sepia: "50%",
+      hue: "-30deg",
+      saturate: "140%"
+    },
+    lofi: {
+      contrast: "140%",
+      brightness: "120%",
+      saturate: "130%",
+      sepia: "35%",
+    },
+    xpro: {
+      contrast: "140%",
+      sepia: "35%",
+    },
+    pro: {
+      contrast: "140%",
+      sepia: "45%",
+      hue: "-5deg",
+      brightness: "175%",
+      saturate: "130%"
+    }
+  }
 
+
+  var filterName;
+
+  const filterSelect = document.getElementById("ba-select");
+
+
+
+  filterSelect.addEventListener('click', getFilterName);
+
+
+
+  function getFilterName() {
+    clearAll();
+    for (const key1 in filters) {
+      if (key1 == filterSelect.value) {
+        // console.log(filters[key]);
+        filterName = filters[key1];
+        console.log(filterName);
+        // console.log(filterName[key1]);
+        for (const key in filterName) {
+          document.documentElement.style.setProperty("--" + key, filterName[key]);
+          document.querySelector('# "key" + -val').innerText(filterName[key]);
+          // console.log(document.querySelectorAll('span#(key + "-val")')).in;
+
+        }
+      }
+    }
+  }
   inputs.forEach(function (element) {
     element.addEventListener("change", handleUpdate);
     element.addEventListener("input", handleUpdate);
